@@ -1,8 +1,12 @@
-image:
-  file: .gitpod.Dockerfile
-
 tasks:
+  - before: |
+      docker run \
+      --publish=7474:7474 --publish=7687:7687 \
+      --volume=$HOME/neo4j/data:/data \
+      neo4j
+
   - command: |
+      gp ports await 7474
       gp preview $(gp url 7474) --external
 
 ports:
